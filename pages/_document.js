@@ -12,10 +12,10 @@ export default function MyDocument(props) {
     <Html lang="en">
       <Head>
         {/* PWA primary color */}
-        <meta name="theme-color" content={theme.palette.primary.main} />
+        {/* <meta name="theme-color" content={theme.palette.primary.main} />
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="emotion-insertion-point" content="" />
-        {emotionStyleTags}
+        {emotionStyleTags} */}
       </Head>
       <body>
         <Main />

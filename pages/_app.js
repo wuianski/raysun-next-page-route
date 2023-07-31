@@ -10,6 +10,8 @@ import createEmotionCache from '../src/createEmotionCache';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../styles/globals.css";
+/** next-seo **/
+import { DefaultSeo } from "next-seo";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -18,6 +20,22 @@ export default function MyApp(props) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   return (
+    <>
+    <DefaultSeo
+        title="Ruey Horng Sun"
+        description="Ruey Horng Sun Personal Website"
+        canonical="https://raysun.cc/"
+        openGraph={{
+          type: "website",
+          locale: "zh_EN",
+          url: "https://raysun.cc/",
+          site_name: "Ruey Horng Sun",
+          title: "Ruey Horng Sun",
+          description:
+            "Ruey Horng Sun Personal Website",
+          
+        }}
+      />
     <CacheProvider value={emotionCache}>
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -28,6 +46,7 @@ export default function MyApp(props) {
         <Component {...pageProps} />
       </ThemeProvider>
     </CacheProvider>
+    </>
   );
 }
 
