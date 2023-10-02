@@ -121,7 +121,7 @@ export default function Nav({ nav }) {
                         {nav.map((n) => (
                             <MenuItem key={n.id} onClick={handleCloseNavMenu}>
                                 <Link href={`/works/${n.id}`}>
-                                    <div>{n.title_en}</div>
+                                    <Box>{n.title_en}</Box>
                                 </Link>
                             </MenuItem>
                         ))}
@@ -148,7 +148,7 @@ export default function Nav({ nav }) {
                         {nav.map((n) => (
                             <Box key={n.id} pb={2}>
                                 <Link href={`/works/${n.id}`}>
-                                    <div>{n.title_en}</div>
+                                    <Box>{n.title_en}</Box>
                                 </Link>
                             </Box>
                         ))}

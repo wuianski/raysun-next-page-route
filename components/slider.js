@@ -3,19 +3,44 @@ import Slider from "react-slick";
 
 import Image from 'next/image'
 import Box from '@mui/material/Box';
+import { width } from "@mui/system";
 
-const settings = {
-    // arrows: true,
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    adaptiveHeight: true,
-};
+// function SampleNextArrow(props) {
+//     const { className, style, onClick } = props;
+//     return (
+//       <div
+//         className={className}
+//         style={{ ...style, display: "block", background: "red" }}
+//         onClick={onClick}
+//       />
+//     );
+//   }
+  
+// function SamplePrevArrow(props) {
+//     const { className, style, onClick } = props;
+//     return (
+//       <div
+//         className={className}
+//         style={{ ...style, display: "block", background: "green" }}
+//         onClick={onClick}
+//       />
+//     );
+//   }
 
 export default function SlickSlider({ data }) {
     // console.log(data)
+    const settings = {
+        // arrows: true,
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        adaptiveHeight: true,
+        // nextArrow: <SampleNextArrow />,
+        // prevArrow: <SamplePrevArrow />
+    };
+
     return (
         <>
              <Slider {...settings}>
@@ -23,24 +48,24 @@ export default function SlickSlider({ data }) {
                     <div key={img.id}>
                         <Box sx={{
                       position: "relative",
-                    //   width:  {xs: "100vw", md: "calc(50vw - 288px)" },
-                    //   width: "calc(100vw - 240px)",
-                      height: "50vh",
-                    //   marginLeft: "auto",
-                    //   marginRight: "auto",
+                      width:"100%",
                     }}>
                         <Image
                             src={`${process.env.DIRECTUS_IMAGE_DOMAIN_DO}${img.directus_files_id.filename_disk}`}
-                            // width={100}
-                            // height={100}
-                            // sizes="1000"
+                            sizes="100vw"
                             alt="Picture of work"
-                            fill
-                            style={{
-                                objectFit: 'cover', // cover, contain, none
-                                objectPosition: 'center'
-                            }}
+                            // fill
+                            // style={{
+                            //     objectFit: 'contain', // cover, contain, none
+                            //     objectPosition: 'center'
+                            // }}
                             // priority
+                            style={{
+                                width: '100%',
+                                height: 'auto',
+                              }}
+                            width={500}
+                            height={300}
                         /> 
                         </Box>
                     </div>  

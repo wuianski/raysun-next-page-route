@@ -42,7 +42,9 @@ export default function Work({ works, nav }) {
                                 __html: w.info,
                             }}>
                         </Box>
-                        <Slider data={w}/>
+                        <Box>
+                            <Slider data={w}/>
+                        </Box>
                         <Box pt={8}
                             dangerouslySetInnerHTML={{
                                 __html: w.details,
@@ -58,7 +60,7 @@ export default function Work({ works, nav }) {
 }
 
 export async function getServerSideProps({ params }) {
-  console.log(params); 
+  // console.log(params); 
   // Run API calls in parallel
   const [works, allworks] = await Promise.all([
     await fetchData(

@@ -83,8 +83,7 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-
-
+  letter-spacing: 0.8px;
 }
 
 /* body { */
@@ -131,4 +130,15 @@ a {
   top: 50%;
   left: calc(50% + 120px);
   transform: translate(-50%, -50%);
+}
+
+.slick-next{
+  right:30px;
+}
+.slick-prev{
+  left:30px;
+  z-index: 999;
+}
+.slick-dots{
+  bottom: -30px;
 }
