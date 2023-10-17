@@ -4,28 +4,35 @@ import Slider from "react-slick";
 import Image from 'next/image'
 import Box from '@mui/material/Box';
 import { width } from "@mui/system";
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
-// function SampleNextArrow(props) {
-//     const { className, style, onClick } = props;
-//     return (
-//       <div
-//         className={className}
-//         style={{ ...style, display: "block", background: "red" }}
-//         onClick={onClick}
-//       />
-//     );
-//   }
+function SampleNextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+    //   <div
+    //     className={className}
+    //     style={{ ...style, display: "block", background: "red" }}
+    //     onClick={onClick}
+    //   />
+    // <div className={className} onClick={onClick}>
+    <ArrowForwardIosIcon className={className} style={{ ...style, display: "block", color:"#ffffff" }} onClick={onClick}/>
+    // </div>
+    );
+  }
   
-// function SamplePrevArrow(props) {
-//     const { className, style, onClick } = props;
-//     return (
-//       <div
-//         className={className}
-//         style={{ ...style, display: "block", background: "green" }}
-//         onClick={onClick}
-//       />
-//     );
-//   }
+function SamplePrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+        <ArrowBackIosIcon className={className} style={{ ...style, display: "block", color:"#ffffff" }} onClick={onClick}/>
+    //   <div
+    //     className={className}
+    //     style={{ ...style, display: "block", background: "green" }}
+    //     onClick={onClick}
+    //   />
+    );
+  }
 
 export default function SlickSlider({ data }) {
     // console.log(data)
@@ -37,8 +44,8 @@ export default function SlickSlider({ data }) {
         slidesToShow: 1,
         slidesToScroll: 1,
         adaptiveHeight: true,
-        // nextArrow: <SampleNextArrow />,
-        // prevArrow: <SamplePrevArrow />
+        nextArrow: <SampleNextArrow />,
+        prevArrow: <SamplePrevArrow />
     };
 
     return (

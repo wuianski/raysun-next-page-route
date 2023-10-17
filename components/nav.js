@@ -8,6 +8,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import Image from 'next/image'
+import ListIcon from '@mui/icons-material/List';
+import TableRowsIcon from '@mui/icons-material/TableRows';
+import GridViewIcon from '@mui/icons-material/GridView';
 
 /** stack Item setting **/
 const Item = styled(Paper)(({ theme }) => ({
@@ -49,6 +53,7 @@ const Item = styled(Paper)(({ theme }) => ({
         paddingTop:0,
         paddingBottom:0,
         paddingLeft:32,
+        display:'flex',
         '& .MuiSvgIcon-root': {
           fontSize: 18,
           color: theme.palette.text.secondary,
@@ -73,6 +78,12 @@ export default function Nav({ nav }) {
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
       };
+
+    const [toggleViewMode, setToggleViewMode] = useState(false);
+    function handleClick() {
+      setToggleViewMode(!toggleViewMode)
+      // console.log(toggleViewMode);
+    }
 
     return (
         <>
@@ -112,15 +123,32 @@ export default function Nav({ nav }) {
                     >
                         <MenuItem>
                             <Link href={`/info/`}>
-                                <Box pt={4} pb={8}>info +</Box>
+                                <Box pt={4} pb={8}>info</Box>
                             </Link>
                         </MenuItem>
-                        <MenuItem disabled={true}>
-                            <Box sx={{color:"#5B5B5B"}} pb={1}>performance</Box>
-                        </MenuItem>
+                        {/* <MenuItem> */}
+                            {/* <Box sx={{color:"#5B5B5B"}} pb={1}>performance</Box> */}
+                            <Box pl={4} sx={{color:"rgba(0, 0, 0, 0.26)", cursor:"pointer"}} pb={2} onClick={handleClick}>{toggleViewMode ? <Box sx={{display:'flex'}}>List <ListIcon /></Box> : <Box sx={{display:'flex'}}>Thumbnails <GridViewIcon color='disabled'/></Box>}</Box>
+                        {/* </MenuItem> */}
                         {nav.map((n) => (
                             <MenuItem key={n.id} onClick={handleCloseNavMenu}>
                                 <Link href={`/works/${n.id}`}>
+                                    <Box sx={{display: toggleViewMode ? 'display' : 'none', paddingTop: toggleViewMode ? 2 : 0}}>
+                                        {n.thumbnail && 
+                                          <>
+                                            <Image
+                                              src={`${process.env.DIRECTUS_IMAGE_DOMAIN_DO}${n.thumbnail && n.thumbnail.filename_disk}`}
+                                              width={315}
+                                              height={180}
+                                              style={{
+                                                objectFit: 'cover', 
+                                                objectPosition: 'center'
+                                              }}
+                                              alt="thumbnail of works"
+                                            />
+                                          </>
+                                        }
+                                    </Box>
                                     <Box>{n.title_en}</Box>
                                 </Link>
                             </MenuItem>
@@ -137,22 +165,42 @@ export default function Nav({ nav }) {
             {/* desktop nav content */}
             <Item sx={{display: { xs: 'none', md: 'block', textTransform:"uppercase" }, paddingBottom:8}}>
                 <Link href={`/info/`}>
-                    <Box>info +</Box>
+                    <Box>info</Box>
                 </Link>
             </Item>
             {/* desktop nav content */}
             <Item sx={{display: { xs: 'none', md: 'block', textTransform:"uppercase" },}}>
-                <Box sx={{height:"calc(100vh - 208px)", overflowY:"scroll"}}> 
-                    <Box sx={{color:"#5B5B5B"}} pb={2}>performance</Box>
-                    <div>
+                <Box sx={{height:"calc(100vh - 208px)", overflow:"hidden"}}> 
+             
+                    <Box sx={{color:"rgba(0, 0, 0, 0.26)", cursor:"pointer"}} pb={2} onClick={handleClick}>{toggleViewMode ? <Box sx={{display:'flex'}}>List <ListIcon /></Box> : <Box sx={{display:'flex'}}>Thumbnails <GridViewIcon color='disabled'/></Box>}</Box>   
+                    {/* <Box sx={{color:"#5B5B5B"}} pb={2}>performance</Box> */}
+                    <Box sx={{position:"relative", overflow:"hidden", width:"100%",height:"100%"}}>
+                    <Box sx={{overflow:"scroll", position:"absolute", top:0,left:0,bottom:"-20px",right:"-20px"}}>
                         {nav.map((n) => (
                             <Box key={n.id} pb={2}>
                                 <Link href={`/works/${n.id}`}>
+                                    <Box sx={{display: toggleViewMode ? 'display' : 'none', paddingTop: toggleViewMode ? 2 : 0}}>
+                                        {n.thumbnail && 
+                                          <>
+                                            <Image
+                                              src={`${process.env.DIRECTUS_IMAGE_DOMAIN_DO}${n.thumbnail && n.thumbnail.filename_disk}`}
+                                              width={215}
+                                              height={130}
+                                              style={{
+                                                objectFit: 'cover', 
+                                                objectPosition: 'center'
+                                              }}
+                                              alt="thumbnail of works"
+                                            />
+                                          </>
+                                        }
+                                    </Box>
                                     <Box>{n.title_en}</Box>
                                 </Link>
                             </Box>
                         ))}
-                    </div>
+                    </Box>
+                    </Box>
                 </Box>
             </Item>
             </Stack>  
